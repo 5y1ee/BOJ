@@ -28,12 +28,12 @@ int main()
 
         for (int i=0; i<M; ++i)
         {
-            // num -= (v[i] / m + 1);
-            // if (v[i] % m == 0)
-            //     num += 1;
-            num -= (v[i]/m);
-            if (v[i] % m != 0)
-                num -= 1;
+            num -= (v[i] / m + 1);
+            if (v[i] % m == 0)
+                num += 1;
+            // num -= (v[i]/m);
+            // if (v[i] % m != 0)
+            //     num -= 1;
         }        
         if (num >= 0){
             Min = min(Min, m);
