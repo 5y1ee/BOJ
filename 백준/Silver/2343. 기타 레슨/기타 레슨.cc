@@ -18,8 +18,7 @@ int main()
     }
 
     long long l, r, m;
-    // l=_max, r=tot/(M-1);
-    l=_max, r=tot;
+    l=_max, r=LLONG_MAX;
 
     while (l<=r)
     {
@@ -41,16 +40,14 @@ int main()
                     sum -= v[i];
                     --i;
                 }
-                // _size = max(_size, sum);
+                _size = max(_size, sum);
                 sum=0;
             }
-            
         }
-
         if (sum != 0)
         {
             ++track;
-            // _size = max(_size, sum);
+            _size = max(_size, sum);
         }
 
         if (track > M)
@@ -59,9 +56,9 @@ int main()
             continue;
         }
 
-        if (i==N && track==M)
+        if (i==N)
         {
-            ans = min(ans, m);
+            ans = min(ans, _size);
             r = m-1;
         }
         else if (track < M)
@@ -70,8 +67,7 @@ int main()
         }
 
     }
-    if (ans == LLONG_MAX) ans = m;
+
     cout << ans;
-    // cout << m;
 
 }
