@@ -1,38 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void combi(const vector<int>& numbers, vector<bool> operation, const int& target, int& answer)
+void func(vector<bool>& v, const vector<int>& num, const int n_size, const int target, int& answer)
 {
-    int _size = operation.size();
-    if (_size == numbers.size())
+    if (v.size() == n_size)
     {
-        int _sum=0;
-        for (int i=0; i<_size; ++i)
+        int sum=0;
+        for (int i=0; i<n_size; ++i)
         {
-            if (operation[i]) _sum += numbers[i];
-            else _sum -= numbers[i];
+            if (v[i])
+                sum += num[i];
+            else
+                sum -= num[i];            
         }
-        if (_sum == target)
+        if (sum == target)
             ++answer;
         return;
     }
     
     for (int i=0; i<2; ++i)
     {
-        bool val;
-        if (i%2==0) val = true;
-        else val = false;
+        if (i%2 == 0)
+            v.push_back(true);
+        else
+            v.push_back(false);
         
-        operation.push_back(val);
-        combi(numbers, operation, target, answer);
-        operation.pop_back();
+        func(v, num, n_size, target, answer);
+        v.pop_back();        
     }
+    
 }
 
-// 2^20 => 1,000^2 => 1,000,000
 int solution(vector<int> numbers, int target) {
     int answer = 0;
-    vector<bool> op;
-    combi(numbers, op, target, answer);
+    int n_size = numbers.size();
+    
+    vector<bool> v;
+    func(v, numbers, n_size, target, answer);
+    
     return answer;
 }
